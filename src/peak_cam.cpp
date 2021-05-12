@@ -124,12 +124,12 @@ void Peak_Cam::openDevice()
             // get the remote device node map
             m_nodeMapRemoteDevice = m_device->RemoteDevice()->NodeMaps().at(0); 
 
-	    std::vector<std::shared_ptr<peak::core::nodes::Node>> nodes = m_nodeMapRemoteDevice->Nodes();
-
-	    for(int x = 0; x < nodes.size(); x++)
-            {
-              ROS_INFO("node: %s", nodes[x]->Name().c_str());
-	    }
+	    // only needed if you want to print out all the setting options for the peak device
+	    //std::vector<std::shared_ptr<peak::core::nodes::Node>> nodes = m_nodeMapRemoteDevice->Nodes();
+	    //for(int x = 0; x < nodes.size(); x++)
+            //{
+            //  ROS_INFO("node: %s", nodes[x]->Name().c_str());
+	    //}
 
             // sets Acquisition Parameters of the camera -> see yaml
             setDeviceParameters();
@@ -175,9 +175,9 @@ void Peak_Cam::setDeviceParameters()
         int maxWidth, maxHeight = 0;
 
         maxWidth = m_nodeMapRemoteDevice->FindNode<peak::core::nodes::IntegerNode>("WidthMax")->Value();
-        ROS_INFO_STREAM("[PEAK_CAM]: maxWidth '" << maxWidth << "'");
+        //ROS_INFO_STREAM("[PEAK_CAM]: maxWidth '" << maxWidth << "'");
         maxHeight = m_nodeMapRemoteDevice->FindNode<peak::core::nodes::IntegerNode>("HeightMax")->Value();
-        ROS_INFO_STREAM("[PEAK_CAM]: maxHeight '" << maxHeight << "'");
+        //ROS_INFO_STREAM("[PEAK_CAM]: maxHeight '" << maxHeight << "'");
         // Set Width, Height
         m_nodeMapRemoteDevice->FindNode<peak::core::nodes::IntegerNode>("Width")->SetValue(peak_params.ImageWidth);
         ROS_INFO_STREAM("[PEAK_CAM]: ImageWidth is set to '" << peak_params.ImageWidth << "'");
